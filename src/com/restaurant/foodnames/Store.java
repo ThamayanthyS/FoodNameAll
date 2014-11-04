@@ -25,8 +25,9 @@ public class Store {
             // System.out.println(statement.toString());
             statement.setString(1, name);
             statement.setString(2, type);
-            System.out.println(statement.toString());
+
             statement.executeUpdate();
+            System.out.println(statement.toString());
 
         } catch (SQLException e) {
             // TODO Auto-generated catch block

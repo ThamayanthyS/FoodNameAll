@@ -147,27 +147,22 @@ public class JsoupParser {
             String s2 = ".html";
             char a1 = 'a';
             for (int i = 0; i < 26; i++) {
-                char a2 = 'b';
+                char a2 = 'a';
                 for (int j = 0; j < 26; j++) {
-
-
                     //System.out.println('a'+1);
                     String s = s1 + a1 + a2 + s2;
                     //System.out.println(s);
                     try {
+                        doc=null;
                         doc = Jsoup.connect(s).timeout(10000).get();
                     } catch (HttpStatusException e) {
                         e.printStackTrace();
                     }
-                    Elements foodnames = null;
+                    Elements foodnames;//
                     if (doc != null) {
                         foodnames = doc.getElementsByTag("a");
-
-
                         int x = 0;
-
                         for (Element ele : foodnames) {
-
                             String temp = ele.text();
                             if (!temp.equals(null) && temp != "" && temp.length() > 0)
                                 System.out.printf("");
