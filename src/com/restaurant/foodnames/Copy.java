@@ -25,19 +25,17 @@ public class Copy {
             preparedStatement=m_Connection.prepareStatement(query);
             //preparedStatement.setNString(1,from);
             m_ResultSet = preparedStatement.executeQuery(query);
+
             while (m_ResultSet.next()) {
                 System.out.println(m_ResultSet.getString(1) + ", ");
+                //System.out.println(to);
                 Store.store(m_ResultSet.getString(1),"",to,m_Connection);
+                //Store.store("sss","",to,m_Connection);
 
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        //String query = "SELECT * FROM ?";
-
-        //ResultSet m_ResultSet = preparedStatement.executeQuery(query);
-
 
     }
 }
