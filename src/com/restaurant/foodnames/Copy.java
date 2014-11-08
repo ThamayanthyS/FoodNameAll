@@ -7,7 +7,6 @@ import java.sql.*;
  */
 public class Copy {
     public static void copyFromOneDataBaseToAnother(String from, String to){
-       // Class.forName("com.microsoft.jdbc.sqlserver.SQLServerDriver");
 
         Connection m_Connection = JDBCConnector.getConnection();
 
@@ -21,18 +20,16 @@ public class Copy {
         PreparedStatement preparedStatement = null;
         ResultSet m_ResultSet=null;
         try {
-            //m_Connection.setAutoCommit(false);
+
             preparedStatement=m_Connection.prepareStatement(query);
-            //preparedStatement.setNString(1,from);
+
             m_ResultSet = preparedStatement.executeQuery(query);
 
             while (m_ResultSet.next()) {
                 String x=m_ResultSet.getString(1);
                 System.out.println(m_ResultSet.getString(1) + ", ");
-                //System.out.println(to);
-                //if(x.length()>1&&)
+
                 Store.store(x,"",to,m_Connection);
-                //Store.store("sss","",to,m_Connection);
 
             }
         } catch (SQLException e) {

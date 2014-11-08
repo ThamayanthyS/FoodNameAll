@@ -47,13 +47,7 @@ public class JsoupParser {
         String tableName = "food_items_food_time_line";
         try {
             doc = Jsoup.connect("http://www.foodtimeline.org/foodfaqindex.html").timeout(10000).get();
-            // Element table = doc.getElementsByTag("table").first();
-            // Element tbody = table.getElementsByTag("tbody").first();
-            // Element tr = tbody.getElementsByTag("tr").first();
-            // Element td = tr.getElementsByTag("td").first();
-            // Element ue = td.getElementsByTag("ul").first();
-            // Elements foodnames = ue.getElementsByTag("li");
-            // con.prepareStatement("DELETE FROM food_items").executeUpdate();
+
             Element body = doc.getElementsByTag("body").first();
             body.getElementsByTag("center").get(0).remove();
             body.getElementsByTag("center").get(1).remove();
@@ -100,16 +94,6 @@ public class JsoupParser {
                 doc = Jsoup.connect(s).timeout(10000).get();
 
                 Element contentWrapper = doc.getElementById("contentWrapper");
-                /*
-                + // Element columnWrapper =
-                        + // contentWrapper.getElementById("columnWrapper");
-                                + // Element pageBody = contentWrapper.getElementById("pageBody");
-                                        + // Element mainContent =
-                                                + // contentWrapper.getElementById("mainContent");
-                                                        + // Element readPanel =
-                                                                + // contentWrapper.getElementById("readPanel");
-                                                                        + // Element tabEntries =
-                                                                                + // contentWrapper.getElementById("tabEntries"); */
                 Element searchContent = contentWrapper.getElementById("searchContent");
 
                 Elements foodnames = searchContent.getElementsByTag("a");
@@ -248,44 +232,34 @@ public class JsoupParser {
                     } catch (HttpStatusException e) {
                         e.printStackTrace();
                     }
-                    Elements foodnames;//
+                    Elements foodnames;
                     if (doc != null) {
                         Elements ele2 = doc.getElementsByTag("a");
                         for (Element e : ele2) {
                             if (ele2.text().length() > 1) {
 
-                               // System.out.println(e.text());
+
                                 Elements e1 = e.select("a[href]");//
 
-                                    if (e1.attr("href") != null) {
-                                        Document doc1=Jsoup.connect(e1.attr("href")).timeout(10000).get();
-                                        Element e3 = doc1.getElementsByTag("h1").first();
-                                        if (e3 != null && e3.text().length() > 0) {
-                                            System.out.println(e3.text());
-                                            String[] names = e3.text().split(", ");
-                                            for (String name : names) {
+                                if (e1.attr("href") != null) {
+                                    Document doc1 = Jsoup.connect(e1.attr("href")).timeout(10000).get();
+                                    Element e3 = doc1.getElementsByTag("h1").first();
+                                    if (e3 != null && e3.text().length() > 0) {
+                                        System.out.println(e3.text());
+                                        String[] names = e3.text().split(", ");
+                                        for (String name : names) {
 
-                                                if(name.length()>1){
-                                                    System.out.println(name);
-                                                    Store.store(name, "", tableName, con);
-                                                }
+                                            if (name.length() > 1) {
+                                                System.out.println(name);
+                                                Store.store(name, "", tableName, con);
                                             }
                                         }
                                     }
                                 }
-//                            }
-
+                            }
 
                         }
-//                        int x = 0;
-//                        for (Element ele : foodnames) {
-//
-//                            String temp = ele.text();
-//                            //System.out.println(ele2);
-//                            if (!temp.equals(null) && temp != "" && temp.length() > 0)
-//                                System.out.printf("");
-//                            Store.store(temp, "", tableName, con);
-//                        }
+
                     }
                     a2++;
 
